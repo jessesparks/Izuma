@@ -30,17 +30,18 @@ namespace Izuma
     {
     public:
         enum LogLevel{
-            LOG_LEVEL_FATAL = 0,
-            LOG_LEVEL_ERROR = 1,
-            LOG_LEVEL_WARN = 2,
-            LOG_LEVEL_INFO = 3,
-            LOG_LEVEL_DEBUG = 4,
-            LOG_LEVEL_TRACE = 5
+            LOG_LEVEL_TRACE = 0,
+            LOG_LEVEL_DEBUG = 1,
+            LOG_LEVEL_INFO = 2,
+            LOG_LEVEL_WARN = 3,
+            LOG_LEVEL_ERROR = 4,
+            LOG_LEVEL_FATAL = 5
+
         };
 
         static inline void Log(LogLevel level, const char* core, const char* file, int line, const char* msg, ...)
         {
-            const char* level_strings[6] = {"\u001b[33;41m [FATAL]", "[ERROR]", "[WARN]", "[INFO]", "[DEBUG]", "[TRACE]"};
+            const char* level_strings[6] = { "\x1B[1;36;40m[TRACE]", "\x1B[1;32;40m[DEBUG]", "\x1B[1;39;49m[INFO]", "\x1B[1;33;49m[WARN]", "\x1B[1;31;40m[ERROR]",   "\x1B[1;30;41m[FATAL]",};
 
             char out_message[32000];
             std::memset(out_message, 0, sizeof(out_message));
