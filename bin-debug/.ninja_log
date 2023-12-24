@@ -1,0 +1,20 @@
+# ninja log v5
+2	274	7250931831635306	InazumaEngine/CMakeFiles/InazumaEngine.dir/src/Test.cpp.obj	b740e77969b10212
+274	339	7250931832155434	InazumaEngine/libInazumaEngine.a	9762cfd40502e817
+2	244	7250949917756313	IzumaEngine/CMakeFiles/IzumaEngine.dir/src/Test.cpp.obj	a67ab6ef1272eddf
+70	132	7251051266182898	IzumaGame/IzumaGame.exe	91d821f7a3cf2380
+4	26	7250931829218900	InazumaGame/CMakeFiles/InazumaGame.dir/src/InazumaGame.cpp.obj	85fe1765cefce39
+2	303	7251041494016616	IzumaEngine/CMakeFiles/IzumaEngine.dir/src/Izuma/Core/Logger.cpp.obj	9d244de47cc06ae1
+339	416	7250931833075451	InazumaGame/InazumaGame.exe	93492ee3c8e256b0
+26	70	7251051265467795	IzumaEngine/libIzumaEngine.a	acfa778c975becc7
+2	305	7251050258114210	IzumaGame/CMakeFiles/IzumaGame.dir/src/IzumaGame.cpp.obj	cf717170e480c70
+0	112	7251052628304540	build.ninja	166edd36e9f26c84
+2	26	7251051265147704	IzumaEngine/CMakeFiles/IzumaEngine.dir/src/Izuma/test.cpp.obj	60b33af979e2a5f5
+2	23	7251052649627631	IzumaEngine/CMakeFiles/IzumaEngine.dir/src/Izuma/test.cpp.obj	f131385b45308175
+23	64	7251052649927630	IzumaEngine/libIzumaEngine.a	acfa778c975becc7
+4	313	7251052652463546	IzumaGame/CMakeFiles/IzumaGame.dir/src/IzumaGame.cpp.obj	b7b630f446fa50ab
+313	394	7251052653313625	IzumaGame/IzumaGame.exe	91d821f7a3cf2380
+3	303	7251052896478572	IzumaGame/CMakeFiles/IzumaGame.dir/src/IzumaGame.cpp.obj	b7b630f446fa50ab
+304	365	7251052897095942	IzumaGame/IzumaGame.exe	91d821f7a3cf2380
+2	299	7251052966444064	IzumaGame/CMakeFiles/IzumaGame.dir/src/IzumaGame.cpp.obj	b7b630f446fa50ab
+299	361	7251052967064038	IzumaGame/IzumaGame.exe	91d821f7a3cf2380
