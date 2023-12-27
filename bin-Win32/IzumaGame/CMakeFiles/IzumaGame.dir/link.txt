@@ -1,3 +1,0 @@
-"C:\Program Files\CMake\bin\cmake.exe" -E rm -f CMakeFiles\IzumaGame.dir/objects.a
-C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\ar.exe qc CMakeFiles\IzumaGame.dir/objects.a @CMakeFiles\IzumaGame.dir\objects1.rsp
-C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE -Wl,--whole-archive CMakeFiles\IzumaGame.dir/objects.a -Wl,--no-whole-archive -o IzumaGame.exe -Wl,--out-implib,libIzumaGame.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\IzumaGame.dir\linkLibs.rsp
