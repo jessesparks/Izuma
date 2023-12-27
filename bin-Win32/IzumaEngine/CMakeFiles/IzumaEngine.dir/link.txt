@@ -1,0 +1,2 @@
+C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\ar.exe qc libIzumaEngine.a CMakeFiles/IzumaEngine.dir/src/Izuma/Application.cpp.obj CMakeFiles/IzumaEngine.dir/src/Izuma/test.cpp.obj CMakeFiles/IzumaEngine.dir/src/Platform/Platform.cpp.obj CMakeFiles/IzumaEngine.dir/src/Platform/WindowsPlatform.cpp.obj
+C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\ranlib.exe libIzumaEngine.a

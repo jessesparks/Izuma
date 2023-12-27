@@ -1,2 +1,0 @@
-/usr/bin/ar qc libIzumaEngine.a CMakeFiles/IzumaEngine.dir/src/Izuma/test.cpp.o
-/usr/bin/ranlib libIzumaEngine.a
