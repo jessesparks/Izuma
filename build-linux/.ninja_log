@@ -1,0 +1,9 @@
+# ninja log v5
+1	11	1703657532577235992	IzumaEngine/CMakeFiles/IzumaEngine.dir/src/Izuma/test.cpp.o	1a66adc6dbccd724
+2	13	1703657532577235992	IzumaEngine/CMakeFiles/IzumaEngine.dir/src/Platform/WindowsPlatform.cpp.o	514053c7332e49f5
+1	118	1703657532685236255	IzumaEngine/CMakeFiles/IzumaEngine.dir/src/Izuma/Application.cpp.o	e1a26c5e4a0f0a6c
+2	128	1703657532693236277	IzumaEngine/CMakeFiles/IzumaEngine.dir/src/Platform/Platform.cpp.o	262fa5cca8fa0b5b
+1	134	1703657532701236296	IzumaEngine/CMakeFiles/IzumaEngine.dir/src/Platform/LinuxPlatform.cpp.o	5238e6c9b09db62
+134	155	1703657532721236343	IzumaEngine/libIzumaEngine.a	5818f7aff3599894
+3	214	1703657532781236490	IzumaEditor/CMakeFiles/IzumaEditor.dir/src/IzumaEditor.cpp.o	e0b6fd2a7c2b363
+3	214	1703657532781236490	IzumaGame/CMakeFiles/IzumaGame.dir/src/IzumaGame.cpp.o	1e0e12f6150800f9

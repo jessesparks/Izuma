@@ -24,7 +24,7 @@ namespace Izuma
 
         virtual double GetTime() = 0;
 
-        virtual void Sleep(double milliseconds) = 0;
+        virtual void Sleep(uint32_t milliseconds) = 0;
 
         static Platform* GetPlatform();
 

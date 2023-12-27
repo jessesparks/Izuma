@@ -1,0 +1,1 @@
+/usr/bin/c++ -g CMakeFiles/IzumaGame.dir/src/IzumaGame.cpp.o -o IzumaGame   -L/home/jesse/dev/Izuma/cmake-build-debug/IzumaEngine  -Wl,-rpath,/home/jesse/dev/Izuma/cmake-build-debug/IzumaEngine ../IzumaEngine/libIzumaEngine.a -lxcb -lX11-xcb -lX11 

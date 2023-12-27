@@ -1,0 +1,159 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1,
+						2,
+						3
+					],
+					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.21"
+					},
+					"projectIndex" : 0,
+					"source" : "."
+				},
+				{
+					"build" : "IzumaEngine",
+					"jsonFile" : "directory-IzumaEngine-Debug-10fcbebd99c1043d97b7.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.21"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 1,
+					"source" : "IzumaEngine",
+					"targetIndexes" : 
+					[
+						1
+					]
+				},
+				{
+					"build" : "IzumaEditor",
+					"jsonFile" : "directory-IzumaEditor-Debug-022f09e226806620c9a1.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.21"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 2,
+					"source" : "IzumaEditor",
+					"targetIndexes" : 
+					[
+						0
+					]
+				},
+				{
+					"build" : "IzumaGame",
+					"jsonFile" : "directory-IzumaGame-Debug-3eba8b108c0c10d1d847.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.21"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 3,
+					"source" : "IzumaGame",
+					"targetIndexes" : 
+					[
+						2
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"childIndexes" : 
+					[
+						1,
+						2,
+						3
+					],
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "Izuma"
+				},
+				{
+					"directoryIndexes" : 
+					[
+						1
+					],
+					"name" : "IzumaEngine",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						1
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						2
+					],
+					"name" : "IzumaEditor",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						0
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						3
+					],
+					"name" : "IzumaGame",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 2,
+					"id" : "IzumaEditor::@99b590a2a4737a38fb65",
+					"jsonFile" : "target-IzumaEditor-Debug-386d8e7a63868de584eb.json",
+					"name" : "IzumaEditor",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "IzumaEngine::@771a7bcb8ea0bda946a9",
+					"jsonFile" : "target-IzumaEngine-Debug-ef783b1f30d4cf45fdcf.json",
+					"name" : "IzumaEngine",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "IzumaGame::@594ce3a1838d04cea1d7",
+					"jsonFile" : "target-IzumaGame-Debug-c3aec61352d55c6c8631.json",
+					"name" : "IzumaGame",
+					"projectIndex" : 3
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/jesse/dev/Izuma/cmake-build-debug",
+		"source" : "/home/jesse/dev/Izuma"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 6
+	}
+}

@@ -149,7 +149,7 @@ namespace Izuma
         return (double)current_time.QuadPart * clock_frequency;
     }
 
-    void WindowsPlatform::Sleep(double milliseconds)
+    void WindowsPlatform::Sleep(uint32_t milliseconds)
     {
         Sleep(milliseconds);
     }

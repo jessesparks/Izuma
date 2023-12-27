@@ -31,7 +31,7 @@ namespace Izuma
 
         virtual double GetTime() override;
 
-        virtual void Sleep(double milliseconds) override;
+        virtual void Sleep(uint32_t milliseconds) override;
 
     private:
         internal_state* m_State;

@@ -9,3 +9,5 @@ file(GLOB_RECURSE SOURCES src/*.h src/*.cpp)
 add_library(IzumaEngine STATIC ${SOURCES})
 
 target_compile_definitions(IzumaEngine PUBLIC IZ_ENABLE_ASSERTS)
+
+target_link_libraries(IzumaEngine LINK_PUBLIC -lxcb LINK_PUBLIC -lX11-xcb LINK_PUBLIC -lX11)

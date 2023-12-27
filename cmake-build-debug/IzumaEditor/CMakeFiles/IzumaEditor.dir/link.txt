@@ -1,0 +1,1 @@
+/usr/bin/c++ -g CMakeFiles/IzumaEditor.dir/src/IzumaEditor.cpp.o -o IzumaEditor   -L/home/jesse/dev/Izuma/cmake-build-debug/IzumaEngine  -Wl,-rpath,/home/jesse/dev/Izuma/cmake-build-debug/IzumaEngine ../IzumaEngine/libIzumaEngine.a -lxcb -lX11-xcb -lX11 

@@ -1,0 +1,2 @@
+/usr/bin/ar qc libIzumaEngine.a CMakeFiles/IzumaEngine.dir/src/Izuma/Application.cpp.o CMakeFiles/IzumaEngine.dir/src/Izuma/test.cpp.o CMakeFiles/IzumaEngine.dir/src/Platform/LinuxPlatform.cpp.o CMakeFiles/IzumaEngine.dir/src/Platform/Platform.cpp.o CMakeFiles/IzumaEngine.dir/src/Platform/WindowsPlatform.cpp.o
+/usr/bin/ranlib libIzumaEngine.a
