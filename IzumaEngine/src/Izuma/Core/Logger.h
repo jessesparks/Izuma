@@ -42,18 +42,9 @@ namespace Izuma
 
         };
 
-        Logger() = default;
-
-        static inline void Init()
+        static inline void Log(LogLevel level, bool isCore, const char* file, int line, const char* msg, ...)
         {
-            s_Instance = new Logger;
-        }
-
-        inline static Logger* GetLogger() { return s_Instance; }
-
-        inline void Log(LogLevel level, const char* core, const char* file, int line, const char* msg, ...)
-        {
-            const char* level_strings[6] = { "\x1B[0;36;49m[TRACE]", "\x1B[0;32;49m[DEBUG]", "\x1B[1;39;49m[INFO]", "\x1B[1;33;49m[WARN]", "\x1B[1;31;49m[ERROR]",   "\x1B[1;31;40m[FATAL]",};
+            const char* level_strings[6] = { "\x1B[0;36;49m[TRACE]: ", "\x1B[0;32;49m[DEBUG]: ", "\x1B[1;39;49m[INFO]: ", "\x1B[1;33;49m[WARN]: ", "\x1B[1;31;49m[ERROR]: ",   "\x1B[1;31;40m[FATAL]: ",};
 
             bool is_error = level > LogLevel::LOG_LEVEL_WARN;
 
@@ -68,7 +59,10 @@ namespace Izuma
             va_end(arg_ptr);
 
             char out_message2[max_length];
-            std::sprintf(out_message2, "%s%s%s%s%s%s%s\n", level_strings[level], core, file, "(", std::to_string(line).c_str(), "): ", out_message);
+            if(isCore)
+                std::sprintf(out_message2, "%s%s%s%s%s%s%s\n", "\x1B[1;36;49m[CORE]", level_strings[level], file, "(", std::to_string(line).c_str(), "): ", out_message);
+            else
+                std::sprintf(out_message2, "%s%s%s%s%s%s%s\n", "\x1B[1;35;49m[CLIENT]", level_strings[level], file, "(", std::to_string(line).c_str(), "): ", out_message);
 
             if(is_error)
             {
@@ -80,64 +74,62 @@ namespace Izuma
 
             //std::printf("%s", out_message2);
         }
-    private:
-        static Logger* s_Instance;
     };
 } // Izuma
 
 //CORE MACROS
-#define IZ_LOG_CORE_FATAL(message, ...) Izuma::Logger::GetLogger()->Log(Izuma::Logger::LOG_LEVEL_FATAL, "[CORE]: ", __FILE__ , __LINE__ , message, ##__VA_ARGS__);
-#define IZ_LOG_CORE_ERROR(message, ...) Izuma::Logger::GetLogger()->Log(Izuma::Logger::LOG_LEVEL_ERROR, "[CORE]: ", __FILE__ , __LINE__ , message, ##__VA_ARGS__);
+#define IZ_LOG_CORE_FATAL(message, ...) Izuma::Logger::Log(Izuma::Logger::LOG_LEVEL_FATAL, true, __FILE__ , __LINE__ , message, ##__VA_ARGS__);
+#define IZ_LOG_CORE_ERROR(message, ...) Izuma::Logger::Log(Izuma::Logger::LOG_LEVEL_ERROR, true, __FILE__ , __LINE__ , message, ##__VA_ARGS__);
 
 #if CORE_LOG_WARN_ENABLED
-#define IZ_LOG_CORE_WARN(message, ...) Izuma::Logger::GetLogger()->Log(Izuma::Logger::LOG_LEVEL_WARN, "[CORE]: ", __FILE__ , __LINE__ , message, ##__VA_ARGS__);
+#define IZ_LOG_CORE_WARN(message, ...) Izuma::Logger::Log(Izuma::Logger::LOG_LEVEL_WARN, true, __FILE__ , __LINE__ , message, ##__VA_ARGS__);
 #else
 #define IZ_LOG_CORE_WARN(message, ...)
 #endif
 
 #if CORE_LOG_INFO_ENABLED
-#define IZ_LOG_CORE_INFO(message, ...) Izuma::Logger::GetLogger()->Log(Izuma::Logger::LOG_LEVEL_INFO, "[CORE]: ", __FILE__ , __LINE__ , message, ##__VA_ARGS__);
+#define IZ_LOG_CORE_INFO(message, ...) Izuma::Logger::Log(Izuma::Logger::LOG_LEVEL_INFO, true, __FILE__ , __LINE__ , message, ##__VA_ARGS__);
 #else
 #define IZ_LOG_CORE_INFO(message, ...)
 #endif
 
 #if CORE_LOG_DEBUG_ENABLED
-#define IZ_LOG_CORE_DEBUG(message, ...) Izuma::Logger::GetLogger()->Log(Izuma::Logger::LOG_LEVEL_DEBUG, "[CORE]: ", __FILE__ , __LINE__ , message, ##__VA_ARGS__);
+#define IZ_LOG_CORE_DEBUG(message, ...) Izuma::Logger::Log(Izuma::Logger::LOG_LEVEL_DEBUG, true, __FILE__ , __LINE__ , message, ##__VA_ARGS__);
 #else
 #define IZ_LOG_CORE_DEBUG(message, ...)
 #endif
 
 #if CORE_LOG_TRACE_ENABLED
-#define IZ_LOG_CORE_TRACE(message, ...) Izuma::Logger::GetLogger()->Log(Izuma::Logger::LOG_LEVEL_TRACE, "[CORE]: ", __FILE__ , __LINE__ , message, ##__VA_ARGS__);
+#define IZ_LOG_CORE_TRACE(message, ...) Izuma::Logger::Log(Izuma::Logger::LOG_LEVEL_TRACE, true, __FILE__ , __LINE__ , message, ##__VA_ARGS__);
 #else
 #define IZ_LOG_CORE_TRACE(message, ...)
 #endif
 
 
 //CLIENT MACROS
-#define IZ_LOG_FATAL(message, ...) Izuma::Logger::GetLogger()->Log(Izuma::Logger::LOG_LEVEL_FATAL, "[CLIENT]: ", __FILE__ , __LINE__ , message, ##__VA_ARGS__);
-#define IZ_LOG_ERROR(message, ...) Izuma::Logger::GetLogger()->Log(Izuma::Logger::LOG_LEVEL_ERROR, "[CLIENT]: ", __FILE__ , __LINE__ , message, ##__VA_ARGS__);
+#define IZ_LOG_FATAL(message, ...) Izuma::Logger::Log(Izuma::Logger::LOG_LEVEL_FATAL, false, __FILE__ , __LINE__ , message, ##__VA_ARGS__);
+#define IZ_LOG_ERROR(message, ...) Izuma::Logger::Log(Izuma::Logger::LOG_LEVEL_ERROR, false, __FILE__ , __LINE__ , message, ##__VA_ARGS__);
 
 #if CLIENT_LOG_WARN_ENABLED
-#define IZ_LOG_WARN(message, ...) Izuma::Logger::GetLogger()->Log(Izuma::Logger::LOG_LEVEL_WARN, "[CLIENT]: ", __FILE__ , __LINE__ , message, ##__VA_ARGS__);
+#define IZ_LOG_WARN(message, ...) Izuma::Logger::Log(Izuma::Logger::LOG_LEVEL_WARN, false, __FILE__ , __LINE__ , message, ##__VA_ARGS__);
 #else
 #define IZ_LOG_WARN(message, ...)
 #endif
 
 #if CLIENT_LOG_INFO_ENABLED
-#define IZ_LOG_INFO(message, ...) Izuma::Logger::GetLogger()->Log(Izuma::Logger::LOG_LEVEL_INFO, "[CLIENT]: ", __FILE__ , __LINE__ , message, ##__VA_ARGS__);
+#define IZ_LOG_INFO(message, ...) Izuma::Logger::Log(Izuma::Logger::LOG_LEVEL_INFO, false, __FILE__ , __LINE__ , message, ##__VA_ARGS__);
 #else
 #define IZ_LOG_INFO(message, ...)
 #endif
 
 #if CLIENT_LOG_DEBUG_ENABLED
-#define IZ_LOG_DEBUG(message, ...) Izuma::Logger::GetLogger()->Log(Izuma::Logger::LOG_LEVEL_DEBUG, "[CLIENT]: ", __FILE__ , __LINE__ , message, ##__VA_ARGS__);
+#define IZ_LOG_DEBUG(message, ...) Izuma::Logger::Log(Izuma::Logger::LOG_LEVEL_DEBUG, false, __FILE__ , __LINE__ , message, ##__VA_ARGS__);
 #else
 #define IZ_LOG_DEBUG(message, ...)
 #endif
 
 #if CLIENT_LOG_TRACE_ENABLED
-#define IZ_LOG_TRACE(message, ...) Izuma::Logger::GetLogger()->Log(Izuma::Logger::LOG_LEVEL_TRACE, "[CLIENT]: ", __FILE__ , __LINE__ , message, ##__VA_ARGS__);
+#define IZ_LOG_TRACE(message, ...) Izuma::Logger::Log(Izuma::Logger::LOG_LEVEL_TRACE, false, __FILE__ , __LINE__ , message, ##__VA_ARGS__);
 #else
 #define IZ_LOG_TRACE(message, ...)
 #endif

@@ -1,5 +1,8 @@
 // Created by Jesse on 12/26/2023.
 #pragma once
+#include "../Izuma/Core/Events/Event.h"
+
+#include <functional>
 #include <cstdint>
 
 namespace Izuma

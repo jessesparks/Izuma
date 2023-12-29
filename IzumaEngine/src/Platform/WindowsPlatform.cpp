@@ -1,5 +1,7 @@
 // Created by Jesse on 12/26/2023.
 #include "WindowsPlatform.h"
+#include "../Izuma/Core/Events/Event.h"
+#include "../Izuma/Core/Events/EventDispatcher.h"
 
 #ifdef _WIN64
 
@@ -161,20 +163,27 @@ namespace Izuma
                 // Notify the OS that erasing will be handled by the application to prevent flicker.
                 return 1;
             case WM_CLOSE:
-                // TODO: Fire an event for the application to quit.
+            {
+                Event event(PlatformEvents::WINDOW_CLOSE);
+                EventDispatcher::Dispatch(event);
                 return 0;
+            }
             case WM_DESTROY:
                 PostQuitMessage(0);
                 return 0;
-            case WM_SIZE: {
-                // Get the updated size.
-                // RECT r;
-                // GetClientRect(hwnd, &r);
-                // uint32_t width = r.right - r.left;
-                // uint32_t height = r.bottom - r.top;
+            case WM_SIZE:
+            {
+                RECT r;
+                GetClientRect(hwnd, &r);
+                unsigned int width = r.right - r.left;
+                unsigned int height = r.bottom - r.top;
 
-                // TODO: Fire an event for window resize.
-            } break;
+                Event event(PlatformEvents::WINDOW_RESIZE);
+                event.AddArg("uiWidth", {EventArg::UINT, width});
+                event.AddArg("uiHeight", {EventArg::UINT, height});
+                EventDispatcher::Dispatch(event);
+                break;
+            }
             case WM_KEYDOWN:
             case WM_SYSKEYDOWN:
             case WM_KEYUP:

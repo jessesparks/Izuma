@@ -10,4 +10,6 @@ add_library(IzumaEngine STATIC ${SOURCES})
 
 target_compile_definitions(IzumaEngine PUBLIC IZ_ENABLE_ASSERTS)
 
+if(${CMAKE_SYSTEM_NAME} EQUAL Linux)
 target_link_libraries(IzumaEngine LINK_PUBLIC -lxcb LINK_PUBLIC -lX11-xcb LINK_PUBLIC -lX11)
+endif()

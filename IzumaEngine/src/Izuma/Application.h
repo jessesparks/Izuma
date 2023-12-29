@@ -1,6 +1,7 @@
 // Created by Jesse on 12/26/2023.
 #pragma once
 #include "../Platform/Platform.h"
+#include "Core/Events/Event.h"
 
 namespace Izuma
 {
@@ -10,6 +11,8 @@ namespace Izuma
         Application();
         virtual ~Application();
 
+        static void OnEvent(Event& e);
+
         void Run();
 
         inline static Application* GetApplication() { return s_Instance; }
@@ -17,6 +20,7 @@ namespace Izuma
     private:
         static Application* s_Instance;
         static Platform* s_Platform;
+        static bool s_Running;
     };
     //TO BE DEFINED IN CLIENT APP
     Application* CreateApplication();
