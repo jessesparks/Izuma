@@ -21,7 +21,14 @@ namespace Izuma
         {
             for(auto listener : s_Listeners)
             {
-                listener(e);
+                if(!e.Handled)
+                {
+                    listener(e);
+                }
+                else
+                {
+                    break;
+                }
             }
         }
 

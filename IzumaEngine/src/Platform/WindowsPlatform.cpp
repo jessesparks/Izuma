@@ -187,19 +187,60 @@ namespace Izuma
             case WM_KEYDOWN:
             case WM_SYSKEYDOWN:
             case WM_KEYUP:
-            case WM_SYSKEYUP: {
-                // Key pressed/released
-                //bool pressed = (msg == WM_KEYDOWN || msg == WM_SYSKEYDOWN);
-                // TODO: input processing
+            case WM_SYSKEYUP:
+            {
+                WORD vkCode = LOWORD(wParam);                                 // virtual-key code
 
-            } break;
-            case WM_MOUSEMOVE: {
+                WORD keyFlags = HIWORD(lParam);
+
+                WORD scanCode = LOBYTE(keyFlags);                             // scan code
+                BOOL isExtendedKey = (keyFlags & KF_EXTENDED) == KF_EXTENDED; // extended-key flag, 1 if scancode has 0xE0 prefix
+
+                if (isExtendedKey)
+                    scanCode = MAKEWORD(scanCode, 0xE0);
+
+                BOOL wasKeyDown = (keyFlags & KF_REPEAT) == KF_REPEAT;        // previous key-state flag, 1 on autorepeat
+                WORD repeatCount = LOWORD(lParam);                            // repeat count, > 0 if several keydown messages was combined into one message
+
+                BOOL isKeyReleased = (keyFlags & KF_UP) == KF_UP;             // transition-state flag, 1 on keyup
+
+                // if we want to distinguish these keys:
+                switch (vkCode)
+                {
+                    case VK_SHIFT:   // converts to VK_LSHIFT or VK_RSHIFT
+                    case VK_CONTROL: // converts to VK_LCONTROL or VK_RCONTROL
+                    case VK_MENU:    // converts to VK_LMENU or VK_RMENU
+                        vkCode = LOWORD(MapVirtualKeyW(scanCode, MAPVK_VSC_TO_VK_EX));
+                        break;
+                }
+
+                if(msg == WM_KEYDOWN || msg == WM_SYSKEYDOWN)
+                {
+                    if(wasKeyDown == 0)
+                    {
+                        Event event(InputEvents::KEY_PRESSED);
+                        event.AddArg("uiKeycode", {EventArg::UINT, (unsigned int)vkCode});
+                        EventDispatcher::Dispatch(event);
+                    }
+                    break;
+                }
+                else
+                {
+                    Event event(InputEvents::KEY_RELEASED);
+                    event.AddArg("uiKeycode", {EventArg::UINT, (unsigned int)vkCode});
+                    EventDispatcher::Dispatch(event);
+                    break;
+                }
+            }
+            case WM_MOUSEMOVE:
+            {
                 // Mouse move
                 //uint32_t x_position = GET_X_LPARAM(l_param);
                 //uint32_t y_position = GET_Y_LPARAM(l_param);
                 // TODO: input processing.
             } break;
-            case WM_MOUSEWHEEL: {
+            case WM_MOUSEWHEEL:
+            {
                 // uint32_t z_delta = GET_WHEEL_DELTA_WPARAM(w_param);
                 // if (z_delta != 0) {
                 //     // Flatten the input to an OS-independent (-1, 1)
@@ -212,7 +253,8 @@ namespace Izuma
             case WM_RBUTTONDOWN:
             case WM_LBUTTONUP:
             case WM_MBUTTONUP:
-            case WM_RBUTTONUP: {
+            case WM_RBUTTONUP:
+            {
                 //bool pressed = msg == WM_LBUTTONDOWN || msg == WM_RBUTTONDOWN || msg == WM_MBUTTONDOWN;
                 // TODO: input processing.
             } break;

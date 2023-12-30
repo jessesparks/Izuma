@@ -2,6 +2,7 @@
 #include "Application.h"
 #include "Core/Logger.h"
 #include "Core/Events/EventDispatcher.h"
+#include "Core/Input/Input.h"
 
 namespace Izuma
 {
@@ -9,6 +10,7 @@ namespace Izuma
     bool Application::s_Running = true;
     Platform* Application::s_Platform = nullptr;
     std::list<void(*)(Event&)> EventDispatcher::s_Listeners;
+    std::unordered_map<unsigned int, bool> Input::s_KeyStates;
 
     Application::Application()
     {
@@ -20,6 +22,7 @@ namespace Izuma
         s_Instance = this;
         s_Platform = Platform::GetPlatform();
         EventDispatcher::Register(Application::OnEvent);
+        Input::Init();
         IZ_LOG_CORE_INFO("Initialized");
     }
 
@@ -72,6 +75,7 @@ namespace Izuma
             {
                 s_Platform->PumpMessages();
             }
+
             s_Platform->Shutdown();
         }
     }

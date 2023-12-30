@@ -11,8 +11,6 @@ namespace Izuma
         Application();
         virtual ~Application();
 
-        static void OnEvent(Event& e);
-
         void Run();
 
         inline static Application* GetApplication() { return s_Instance; }
@@ -21,6 +19,7 @@ namespace Izuma
         static Application* s_Instance;
         static Platform* s_Platform;
         static bool s_Running;
+        static void OnEvent(Event& e);
     };
     //TO BE DEFINED IN CLIENT APP
     Application* CreateApplication();
