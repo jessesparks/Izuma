@@ -1646,7 +1646,7 @@ enum ESteamNetworkingSocketsDebugOutputType
 {
 	k_ESteamNetworkingSocketsDebugOutputType_None = 0,
 	k_ESteamNetworkingSocketsDebugOutputType_Bug = 1, // You used the API incorrectly, or an internal error happened
-	k_ESteamNetworkingSocketsDebugOutputType_Error = 2, // Run-time error condition that isn't the result of a bug.  (E.g. we are offline, cannot bind a port, etc)
+	k_ESteamNetworkingSocketsDebugOutputType_Error = 2, // Init-time error condition that isn't the result of a bug.  (E.g. we are offline, cannot bind a port, etc)
 	k_ESteamNetworkingSocketsDebugOutputType_Important = 3, // Nothing is wrong, but this is an important notification
 	k_ESteamNetworkingSocketsDebugOutputType_Warning = 4,
 	k_ESteamNetworkingSocketsDebugOutputType_Msg = 5, // Recommended amount

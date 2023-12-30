@@ -135,8 +135,8 @@ namespace Izuma
 #endif
 
 #if IZ_ENABLE_ASSERTS
-#define IZ_CORE_ASSERT(x, ...) { if(!(x)) { IZ_LOG_CORE_ERROR("Assertion Failed: %s", __VA_ARGS__); } }
-#define IZ_ASSERT(x, ...) { if(!(x)) { IZ_LOG_ERROR("Assertion Failed: %s", __VA_ARGS__); } }
+#define IZ_CORE_ASSERT(x, ...) { if(!(x)) { IZ_LOG_CORE_ERROR("Assertion Failed: %s", __VA_ARGS__) } }
+#define IZ_ASSERT(x, ...) { if(!(x)) { IZ_LOG_ERROR("Assertion Failed: %s", __VA_ARGS__) } }
 #else
 #define IZ_CORE_ASSERT(x, ...)
 #define IZ_ASSERT(x, ...)

@@ -20,7 +20,8 @@
 		],
 		"files" : 
 		[
-			"IzumaEditor/CMakeLists.txt"
+			"IzumaEditor/CMakeLists.txt",
+			"IzumaEngine/CMakeLists.txt"
 		],
 		"nodes" : 
 		[
@@ -44,6 +45,15 @@
 				"file" : 0,
 				"line" : 13,
 				"parent" : 0
+			},
+			{
+				"file" : 1
+			},
+			{
+				"command" : 2,
+				"file" : 1,
+				"line" : 16,
+				"parent" : 4
 			},
 			{
 				"command" : 3,
@@ -72,8 +82,12 @@
 			"includes" : 
 			[
 				{
-					"backtrace" : 4,
+					"backtrace" : 6,
 					"path" : "C:/dev/Izuma/IzumaEngine/src"
+				},
+				{
+					"backtrace" : 3,
+					"path" : "C:/dev/Izuma/IzumaEngine/../vendor/GameNetworkingSockets/include"
 				}
 			],
 			"language" : "CXX",
@@ -119,6 +133,11 @@
 			{
 				"backtrace" : 3,
 				"fragment" : "IzumaEngine\\libIzumaEngine.a",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 5,
+				"fragment" : "C:\\dev\\Izuma\\IzumaEngine\\..\\vendor\\GameNetworkingSockets\\bin\\GameNetworkingSockets.dll",
 				"role" : "libraries"
 			},
 			{

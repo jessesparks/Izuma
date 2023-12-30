@@ -4,6 +4,8 @@
 #include "Core/Events/EventDispatcher.h"
 #include "Core/Input/Input.h"
 
+const uint16 DEFAULT_PORT = 27020;
+
 namespace Izuma
 {
     Application* Application::s_Instance = nullptr;
@@ -23,6 +25,8 @@ namespace Izuma
         s_Platform = Platform::GetPlatform();
         EventDispatcher::Register(Application::OnEvent);
         Input::Init();
+        ip.Clear();
+        ip.ParseString("68.48.170.187");
         IZ_LOG_CORE_INFO("Initialized");
     }
 
@@ -57,6 +61,10 @@ namespace Izuma
                 IZ_LOG_CORE_INFO("WindowResizeEvent:%ix%ip", width, height);
                 break;
             }
+            case ID("SPACE"):
+            {
+                IZ_LOG_CORE_INFO("SPACE");
+            }
         }
     }
 
@@ -65,15 +73,36 @@ namespace Izuma
         if(s_Platform->Init("Izuma Application", 600, 300, 1280, 720))
         {
             Event health("Health Pickup");
-            health.AddArg("iHealth", {EventArg::INT, 50});
-            health.AddArg("fRadius", {EventArg::FLOAT, 10.0f});
-            health.AddArg("bGrabbed", {EventArg::BOOL, false});
-            health.AddArg("cName", {EventArg::CHAR, "Basic Health Pickup"});
+            health.AddArg("iHealth", {EventArg::EventType::INT, 50});
+            health.AddArg("fRadius", {EventArg::EventType::FLOAT, 10.0f});
+            health.AddArg("bGrabbed", {EventArg::EventType::BOOL, false});
+            health.AddArg("cName", {EventArg::EventType::CHAR, "Basic Health Pickup"});
             EventDispatcher::Dispatch(health);
 
             while(s_Running)
             {
+                if(Input::IsKeyDown(IZ_KEY_H) && !m_ServerRunning)
+                {
+                    m_ServerRunning = true;
+                    m_Server.Init(DEFAULT_PORT);
+                }
+                if(Input::IsKeyDown(IZ_KEY_J) && !m_ClientRunning)
+                {
+                    m_ClientRunning = true;
+                    SteamNetworkingIPAddr addr = ip;
+                    addr.m_port = DEFAULT_PORT;
+                    m_Client.Init(addr);
+                }
                 s_Platform->PumpMessages();
+
+                if(m_ServerRunning)
+                {
+                    m_Server.Update();
+                }
+                if(m_ClientRunning)
+                {
+                    m_Client.Update();
+                }
             }
 
             s_Platform->Shutdown();

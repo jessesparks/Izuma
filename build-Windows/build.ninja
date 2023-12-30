@@ -45,8 +45,9 @@ cmake_ninja_workdir = C$:/dev/Izuma/build-Windows/
 # Utility command for edit_cache
 
 build CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\dev\Izuma\build-Windows && "C:\Program Files\JetBrains\CLion 2023.2\bin\cmake\win\x64\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
-  DESC = No interactive CMake dialog available...
+  COMMAND = cmd.exe /C "cd /D C:\dev\Izuma\build-Windows && "C:\Program Files\CMake\bin\cmake-gui.exe" -SC:\dev\Izuma -BC:\dev\Izuma\build-Windows"
+  DESC = Running CMake cache editor...
+  pool = console
   restat = 1
 
 build edit_cache: phony CMakeFiles/edit_cache.util
@@ -84,6 +85,22 @@ build IzumaEngine/CMakeFiles/IzumaEngine.dir/src/Izuma/Application.cpp.obj: CXX_
   INCLUDES = -IC:/dev/Izuma/IzumaEngine/../vendor/GameNetworkingSockets/include
   OBJECT_DIR = IzumaEngine\CMakeFiles\IzumaEngine.dir
   OBJECT_FILE_DIR = IzumaEngine\CMakeFiles\IzumaEngine.dir\src\Izuma
+
+build IzumaEngine/CMakeFiles/IzumaEngine.dir/src/Izuma/Core/Network/Client.cpp.obj: CXX_COMPILER__IzumaEngine_unscanned_Debug C$:/dev/Izuma/IzumaEngine/src/Izuma/Core/Network/Client.cpp || cmake_object_order_depends_target_IzumaEngine
+  DEFINES = -DIZ_ENABLE_ASSERTS
+  DEP_FILE = IzumaEngine\CMakeFiles\IzumaEngine.dir\src\Izuma\Core\Network\Client.cpp.obj.d
+  FLAGS = -g -std=gnu++17 -fcolor-diagnostics
+  INCLUDES = -IC:/dev/Izuma/IzumaEngine/../vendor/GameNetworkingSockets/include
+  OBJECT_DIR = IzumaEngine\CMakeFiles\IzumaEngine.dir
+  OBJECT_FILE_DIR = IzumaEngine\CMakeFiles\IzumaEngine.dir\src\Izuma\Core\Network
+
+build IzumaEngine/CMakeFiles/IzumaEngine.dir/src/Izuma/Core/Network/Server.cpp.obj: CXX_COMPILER__IzumaEngine_unscanned_Debug C$:/dev/Izuma/IzumaEngine/src/Izuma/Core/Network/Server.cpp || cmake_object_order_depends_target_IzumaEngine
+  DEFINES = -DIZ_ENABLE_ASSERTS
+  DEP_FILE = IzumaEngine\CMakeFiles\IzumaEngine.dir\src\Izuma\Core\Network\Server.cpp.obj.d
+  FLAGS = -g -std=gnu++17 -fcolor-diagnostics
+  INCLUDES = -IC:/dev/Izuma/IzumaEngine/../vendor/GameNetworkingSockets/include
+  OBJECT_DIR = IzumaEngine\CMakeFiles\IzumaEngine.dir
+  OBJECT_FILE_DIR = IzumaEngine\CMakeFiles\IzumaEngine.dir\src\Izuma\Core\Network
 
 build IzumaEngine/CMakeFiles/IzumaEngine.dir/src/Izuma/test.cpp.obj: CXX_COMPILER__IzumaEngine_unscanned_Debug C$:/dev/Izuma/IzumaEngine/src/Izuma/test.cpp || cmake_object_order_depends_target_IzumaEngine
   DEFINES = -DIZ_ENABLE_ASSERTS
@@ -125,7 +142,7 @@ build IzumaEngine/CMakeFiles/IzumaEngine.dir/src/Platform/WindowsPlatform.cpp.ob
 #############################################
 # Link the static library IzumaEngine\libIzumaEngine.a
 
-build IzumaEngine/libIzumaEngine.a: CXX_STATIC_LIBRARY_LINKER__IzumaEngine_Debug IzumaEngine/CMakeFiles/IzumaEngine.dir/src/Izuma/Application.cpp.obj IzumaEngine/CMakeFiles/IzumaEngine.dir/src/Izuma/test.cpp.obj IzumaEngine/CMakeFiles/IzumaEngine.dir/src/Platform/LinuxPlatform.cpp.obj IzumaEngine/CMakeFiles/IzumaEngine.dir/src/Platform/Platform.cpp.obj IzumaEngine/CMakeFiles/IzumaEngine.dir/src/Platform/WindowsPlatform.cpp.obj
+build IzumaEngine/libIzumaEngine.a: CXX_STATIC_LIBRARY_LINKER__IzumaEngine_Debug IzumaEngine/CMakeFiles/IzumaEngine.dir/src/Izuma/Application.cpp.obj IzumaEngine/CMakeFiles/IzumaEngine.dir/src/Izuma/Core/Network/Client.cpp.obj IzumaEngine/CMakeFiles/IzumaEngine.dir/src/Izuma/Core/Network/Server.cpp.obj IzumaEngine/CMakeFiles/IzumaEngine.dir/src/Izuma/test.cpp.obj IzumaEngine/CMakeFiles/IzumaEngine.dir/src/Platform/LinuxPlatform.cpp.obj IzumaEngine/CMakeFiles/IzumaEngine.dir/src/Platform/Platform.cpp.obj IzumaEngine/CMakeFiles/IzumaEngine.dir/src/Platform/WindowsPlatform.cpp.obj
   LANGUAGE_COMPILE_FLAGS = -g
   OBJECT_DIR = IzumaEngine\CMakeFiles\IzumaEngine.dir
   POST_BUILD = cd .
@@ -138,8 +155,9 @@ build IzumaEngine/libIzumaEngine.a: CXX_STATIC_LIBRARY_LINKER__IzumaEngine_Debug
 # Utility command for edit_cache
 
 build IzumaEngine/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\dev\Izuma\build-Windows\IzumaEngine && "C:\Program Files\JetBrains\CLion 2023.2\bin\cmake\win\x64\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
-  DESC = No interactive CMake dialog available...
+  COMMAND = cmd.exe /C "cd /D C:\dev\Izuma\build-Windows\IzumaEngine && "C:\Program Files\CMake\bin\cmake-gui.exe" -SC:\dev\Izuma -BC:\dev\Izuma\build-Windows"
+  DESC = Running CMake cache editor...
+  pool = console
   restat = 1
 
 build IzumaEngine/edit_cache: phony IzumaEngine/CMakeFiles/edit_cache.util
@@ -174,7 +192,7 @@ build IzumaEditor/CMakeFiles/IzumaEditor.dir/src/IzumaEditor.cpp.obj: CXX_COMPIL
   DEFINES = -DIZ_ENABLE_ASSERTS
   DEP_FILE = IzumaEditor\CMakeFiles\IzumaEditor.dir\src\IzumaEditor.cpp.obj.d
   FLAGS = -g -std=gnu++17 -fcolor-diagnostics
-  INCLUDES = -IC:/dev/Izuma/IzumaEngine/src
+  INCLUDES = -IC:/dev/Izuma/IzumaEngine/src -IC:/dev/Izuma/IzumaEngine/../vendor/GameNetworkingSockets/include
   OBJECT_DIR = IzumaEditor\CMakeFiles\IzumaEditor.dir
   OBJECT_FILE_DIR = IzumaEditor\CMakeFiles\IzumaEditor.dir\src
 
@@ -186,9 +204,9 @@ build IzumaEditor/CMakeFiles/IzumaEditor.dir/src/IzumaEditor.cpp.obj: CXX_COMPIL
 #############################################
 # Link the executable IzumaEditor\IzumaEditor.exe
 
-build IzumaEditor/IzumaEditor.exe: CXX_EXECUTABLE_LINKER__IzumaEditor_Debug IzumaEditor/CMakeFiles/IzumaEditor.dir/src/IzumaEditor.cpp.obj | IzumaEngine/libIzumaEngine.a || IzumaEngine/libIzumaEngine.a
+build IzumaEditor/IzumaEditor.exe: CXX_EXECUTABLE_LINKER__IzumaEditor_Debug IzumaEditor/CMakeFiles/IzumaEditor.dir/src/IzumaEditor.cpp.obj | IzumaEngine/libIzumaEngine.a C$:/dev/Izuma/IzumaEngine/../vendor/GameNetworkingSockets/bin/GameNetworkingSockets.dll || IzumaEngine/libIzumaEngine.a
   FLAGS = -g
-  LINK_LIBRARIES = IzumaEngine/libIzumaEngine.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+  LINK_LIBRARIES = IzumaEngine/libIzumaEngine.a  C:/dev/Izuma/IzumaEngine/../vendor/GameNetworkingSockets/bin/GameNetworkingSockets.dll  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   LINK_PATH = -LC:/dev/Izuma/build-Windows/IzumaEngine
   OBJECT_DIR = IzumaEditor\CMakeFiles\IzumaEditor.dir
   POST_BUILD = cd .
@@ -202,8 +220,9 @@ build IzumaEditor/IzumaEditor.exe: CXX_EXECUTABLE_LINKER__IzumaEditor_Debug Izum
 # Utility command for edit_cache
 
 build IzumaEditor/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\dev\Izuma\build-Windows\IzumaEditor && "C:\Program Files\JetBrains\CLion 2023.2\bin\cmake\win\x64\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
-  DESC = No interactive CMake dialog available...
+  COMMAND = cmd.exe /C "cd /D C:\dev\Izuma\build-Windows\IzumaEditor && "C:\Program Files\CMake\bin\cmake-gui.exe" -SC:\dev\Izuma -BC:\dev\Izuma\build-Windows"
+  DESC = Running CMake cache editor...
+  pool = console
   restat = 1
 
 build IzumaEditor/edit_cache: phony IzumaEditor/CMakeFiles/edit_cache.util
@@ -238,7 +257,7 @@ build IzumaGame/CMakeFiles/IzumaGame.dir/src/IzumaGame.cpp.obj: CXX_COMPILER__Iz
   DEFINES = -DIZ_ENABLE_ASSERTS
   DEP_FILE = IzumaGame\CMakeFiles\IzumaGame.dir\src\IzumaGame.cpp.obj.d
   FLAGS = -g -std=gnu++17 -fcolor-diagnostics
-  INCLUDES = -IC:/dev/Izuma/IzumaEngine/src
+  INCLUDES = -IC:/dev/Izuma/IzumaEngine/src -IC:/dev/Izuma/IzumaEngine/../vendor/GameNetworkingSockets/include
   OBJECT_DIR = IzumaGame\CMakeFiles\IzumaGame.dir
   OBJECT_FILE_DIR = IzumaGame\CMakeFiles\IzumaGame.dir\src
 
@@ -250,9 +269,9 @@ build IzumaGame/CMakeFiles/IzumaGame.dir/src/IzumaGame.cpp.obj: CXX_COMPILER__Iz
 #############################################
 # Link the executable IzumaGame\IzumaGame.exe
 
-build IzumaGame/IzumaGame.exe: CXX_EXECUTABLE_LINKER__IzumaGame_Debug IzumaGame/CMakeFiles/IzumaGame.dir/src/IzumaGame.cpp.obj | IzumaEngine/libIzumaEngine.a || IzumaEngine/libIzumaEngine.a
+build IzumaGame/IzumaGame.exe: CXX_EXECUTABLE_LINKER__IzumaGame_Debug IzumaGame/CMakeFiles/IzumaGame.dir/src/IzumaGame.cpp.obj | IzumaEngine/libIzumaEngine.a C$:/dev/Izuma/IzumaEngine/../vendor/GameNetworkingSockets/bin/GameNetworkingSockets.dll || IzumaEngine/libIzumaEngine.a
   FLAGS = -g
-  LINK_LIBRARIES = IzumaEngine/libIzumaEngine.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+  LINK_LIBRARIES = IzumaEngine/libIzumaEngine.a  C:/dev/Izuma/IzumaEngine/../vendor/GameNetworkingSockets/bin/GameNetworkingSockets.dll  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   LINK_PATH = -LC:/dev/Izuma/build-Windows/IzumaEngine
   OBJECT_DIR = IzumaGame\CMakeFiles\IzumaGame.dir
   POST_BUILD = cd .
@@ -266,8 +285,9 @@ build IzumaGame/IzumaGame.exe: CXX_EXECUTABLE_LINKER__IzumaGame_Debug IzumaGame/
 # Utility command for edit_cache
 
 build IzumaGame/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\dev\Izuma\build-Windows\IzumaGame && "C:\Program Files\JetBrains\CLion 2023.2\bin\cmake\win\x64\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
-  DESC = No interactive CMake dialog available...
+  COMMAND = cmd.exe /C "cd /D C:\dev\Izuma\build-Windows\IzumaGame && "C:\Program Files\CMake\bin\cmake-gui.exe" -SC:\dev\Izuma -BC:\dev\Izuma\build-Windows"
+  DESC = Running CMake cache editor...
+  pool = console
   restat = 1
 
 build IzumaGame/edit_cache: phony IzumaGame/CMakeFiles/edit_cache.util

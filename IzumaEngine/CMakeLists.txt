@@ -10,14 +10,12 @@ add_library(IzumaEngine STATIC ${SOURCES})
 
 target_compile_definitions(IzumaEngine PUBLIC IZ_ENABLE_ASSERTS)
 
-include_directories(../vendor/GameNetworkingSockets/include)
+target_include_directories(IzumaEngine PUBLIC ../vendor/GameNetworkingSockets/include)
 
-if(${CMAKE_SYSTEM_NAME} EQUAL Windows)
-    target_link_libraries(${PROJECT_NAME} ${PROJECT_SOURCE_DIR}/vendor/GameNetworkingSockets/bin/GameNetworkingSockets.dll)
-    message("Windows Detected")
-endif()
-
-if(${CMAKE_SYSTEM_NAME} EQUAL Linux)
+if(${CMAKE_SYSTEM} MATCHES Windows)
+    target_link_libraries(IzumaEngine LINK_PUBLIC ${PROJECT_SOURCE_DIR}/../vendor/GameNetworkingSockets/bin/GameNetworkingSockets.dll)
+    message(STATUS "Windows Detected")
+elseif(${CMAKE_SYSTEM} MATCHES Linux)
     target_link_libraries(IzumaEngine LINK_PUBLIC -lxcb LINK_PUBLIC -lX11-xcb LINK_PUBLIC -lX11)
-    message("Linux Detected")
+    message(STATUS "Linux Detected")
 endif()

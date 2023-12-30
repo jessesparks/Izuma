@@ -2,7 +2,9 @@
 #pragma once
 #include <type_traits>
 #include <string>
+#include <cstring>
 #include <string_view>
+#include <sstream>
 #include <unordered_map>
 #include <vector>
 #include <variant>
@@ -44,7 +46,7 @@ namespace Izuma
 
     struct EventArg
     {
-        enum
+        enum class EventType : int
         {
             INT,
             FLOAT,
@@ -52,7 +54,8 @@ namespace Izuma
             CHAR,
             UINT,
             COUNT       //Number of unique types
-        } Type;
+        };
+        EventType Type;
 
         std::variant<int, float, bool, const char*, unsigned int> value;
 
@@ -72,6 +75,7 @@ namespace Izuma
     {
         const static int MAX_ARGS = 16;
     public:
+        friend class EventSerializer;
         std::size_t GetID() const { return m_ID; }
         bool Handled = false;
 
@@ -79,39 +83,185 @@ namespace Izuma
         explicit Event(const std::string& name)
                 : m_ID(ID(name))
         {
-            args.reserve(MAX_ARGS);
+            m_Args.reserve(MAX_ARGS);
         }
         explicit Event(ID id)
                 : m_ID(id)
         {
-            args.reserve(MAX_ARGS);
+            m_Args.reserve(MAX_ARGS);
         }
         explicit Event(std::size_t id)
                 : m_ID(id)
         {
-            args.reserve(MAX_ARGS);
+            m_Args.reserve(MAX_ARGS);
         }
 
-        int GetNumberOfArgs() { return (int)args.size(); }
+        int GetNumberOfArgs() const { return (int)m_Args.size(); }
 
         void AddArg(const std::string& name, EventArg arg)
         {
-            args[name] = arg;
+            m_Args[name] = arg;
         }
 
         EventArg GetArg(const std::string& name)
         {
-            return args[name];
+            return m_Args.at(name);
         }
 
         //bool operator==(const Event other) const { if(m_ID == other.GetID()) return true; else return false; }
         constexpr bool operator==(const std::size_t other) const { if(m_ID == other) return true; else return false; }
 
     private:
-        std::unordered_map<std::string, EventArg> args;
+        std::unordered_map<std::string, EventArg> m_Args;
         std::size_t m_ID;
     };
+
+    struct EventSerializer
+    {
+        char data[1024];
+
+        void Serialize(const Event& other)
+        {
+            std::stringstream out;
+            out << other.GetID();
+            out << ',';
+            out << other.Handled;
+            out << ',';
+            out << other.GetNumberOfArgs();
+            out << ',';
+            for (const auto& arg : other.m_Args)
+            {
+                out << arg.first.size();
+                out << ',';
+                out << arg.first;
+                out << ',';
+                out << (int)arg.second.Type;
+                out << ',';
+                switch(arg.second.Type)
+                {
+                    case EventArg::EventType::INT:
+                    {
+                        out << (int)arg.second;
+                        break;
+                    }
+                    case EventArg::EventType::FLOAT:
+                    {
+                        out << (float)arg.second;
+                        break;
+                    }
+                    case EventArg::EventType::BOOL:
+                    {
+                        out << (bool)arg.second;
+                        break;
+                    }
+                    case EventArg::EventType::CHAR:
+                    {
+                        out << (const char*)arg.second;
+                        break;
+                    }
+                    case EventArg::EventType::UINT:
+                    case EventArg::EventType::COUNT:
+                    {
+                        out << (unsigned int)arg.second;
+                        break;
+                    }
+                }
+                out << ',';
+            }
+            out.seekp(-1, out.cur);
+            out << '\0';
+            std::string tmp;
+            out >> tmp;
+            for (int i = 0; i < tmp.length(); i++)
+            {
+                data[i] = tmp[i];
+            }
+        }
+
+        Event Deserialize(char* packet) const
+        {
+            std::stringstream in;
+            in << packet;
+            in.seekp(in.beg);
+            if(in)
+            {
+                int len = 0;
+                char comma;
+                int nmbrargs;
+                std::size_t id;
+                in >> id;
+                Event event(id);
+
+                in >> comma;
+                in >> event.Handled;
+                in >> comma;
+                in >> nmbrargs;
+                in >> comma;
+                for(int i = 0; i < nmbrargs; i++)
+                {
+                    in >> len;
+                    in >> comma;
+                    std::string temp;
+                    if (in && len) {
+                        std::vector<char> tmp(len);
+                        in.read(tmp.data() , len); //deserialize characters of string
+                        temp.assign(tmp.data(), len);
+                    }
+                    in >> comma;
+                    int type;
+                    in >> type;
+                    in >>comma;
+                    EventArg::EventType t = static_cast<EventArg::EventType>(type);
+                    switch(t)
+                    {
+                        case EventArg::EventType::INT:
+                        {
+                            int value;
+                            in >> value;
+                            event.AddArg(temp, {t, value});
+                            break;
+                        }
+                        case EventArg::EventType::FLOAT:
+                        {
+                            float value;
+                            in >> value;
+                            event.AddArg(temp, {t, value});
+                            break;
+                        }
+                        case EventArg::EventType::BOOL:
+                        {
+                            bool value;
+                            in >> value;
+                            event.AddArg(temp, {t, value});
+                            break;
+                        }
+                        case EventArg::EventType::CHAR:
+                        {
+                            std::string tmp;
+                            in >> tmp;
+                            event.AddArg(temp, {t, tmp.c_str()});
+                            break;
+                        }
+                        case EventArg::EventType::UINT:
+                        case EventArg::EventType::COUNT:
+                        {
+                            unsigned int value;
+                            in >> value;
+                            event.AddArg(temp, {t, value});
+                            break;
+                        }
+                    }
+                    in >> comma;
+                }
+                return event;
+            }
+            return Event("-1");
+        }
+
+        operator char*() { return data; }
+    };
 }
+
 
 namespace Izuma::PlatformEvents
 {

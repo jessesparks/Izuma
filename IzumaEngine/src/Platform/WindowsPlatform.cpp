@@ -179,8 +179,8 @@ namespace Izuma
                 unsigned int height = r.bottom - r.top;
 
                 Event event(PlatformEvents::WINDOW_RESIZE);
-                event.AddArg("uiWidth", {EventArg::UINT, width});
-                event.AddArg("uiHeight", {EventArg::UINT, height});
+                event.AddArg("uiWidth", {EventArg::EventType::UINT, width});
+                event.AddArg("uiHeight", {EventArg::EventType::UINT, height});
                 EventDispatcher::Dispatch(event);
                 break;
             }
@@ -219,7 +219,7 @@ namespace Izuma
                     if(wasKeyDown == 0)
                     {
                         Event event(InputEvents::KEY_PRESSED);
-                        event.AddArg("uiKeycode", {EventArg::UINT, (unsigned int)vkCode});
+                        event.AddArg("uiKeycode", {EventArg::EventType::UINT, (unsigned int)vkCode});
                         EventDispatcher::Dispatch(event);
                     }
                     break;
@@ -227,7 +227,7 @@ namespace Izuma
                 else
                 {
                     Event event(InputEvents::KEY_RELEASED);
-                    event.AddArg("uiKeycode", {EventArg::UINT, (unsigned int)vkCode});
+                    event.AddArg("uiKeycode", {EventArg::EventType::UINT, (unsigned int)vkCode});
                     EventDispatcher::Dispatch(event);
                     break;
                 }
